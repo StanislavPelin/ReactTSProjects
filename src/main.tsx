@@ -1,11 +1,34 @@
-import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
-import "./index.css";
-import { Provider } from "react-redux";
-import { store } from "./state/store.ts";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <Provider store={store}>
-    <App />
-  </Provider>
+import HomePage from './pages/HomePage';
+import NotFoundPage from "./pages/NotFoundPage.tsx";
+import ProfilePage from "./pages/ProfilePage.tsx";
+import ProfilesPage from "./pages/ProfilesPage.tsx";
+
+import './index.css';
+
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <HomePage/>,
+        errorElement: <NotFoundPage/>
+    },
+    {
+        path: '/profiles',
+        element: <ProfilesPage/>,
+        children: [
+            {
+                path: '/profiles/:profileId',
+                element: <ProfilePage/>
+            }
+        ]
+    }
+]);
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+    <React.StrictMode>
+        <RouterProvider router={router}/>
+    </React.StrictMode>
 );
