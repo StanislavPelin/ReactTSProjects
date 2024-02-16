@@ -1,13 +1,11 @@
 import './App.css';
-import React, {JSX} from "react";
-import GiftInfo from "./components/GiftInfo";
-import GiftImage from "./components/GiftImage";
+import React from "react";
+import Counter from "./components/Counter";
 
 export default function App() {
-  return (
-      <section className="section-center">
-        <GiftImage />
-        <GiftInfo />
-      </section>
-  );
+    return (
+        <main>
+            <Counter />
+        </main>
+    );
 }
