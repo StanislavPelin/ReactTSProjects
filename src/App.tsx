@@ -1,24 +1,19 @@
 import './App.css';
 import React, {useState} from "react";
 import Header from "./components/Header";
-import ModalOverlay from "./components/ModalOverlay";
-
-export type MenuItem = {
-    id: number;
-    title: string;
-    category: string;
-    price: number;
-    img: string;
-    desc: string;
-}
+import Links from "./components/Links";
+import SocialIcons from "./components/SocialIcons";
 
 export default function App() {
-    const [modalOpened, setModalOpened] = useState<boolean>(false);
+    const [toggle, setToggle] = useState<boolean>(false);
 
     return (
-        <>
-            <Header setModalOpened={setModalOpened}/>
-            <ModalOverlay modalOpened={modalOpened} setModalOpened={setModalOpened}/>
-        </>
+        <nav>
+            <div className="nav-center">
+                <Header toggle={toggle} setToggle={setToggle}/>
+                <Links toggle={toggle}/>
+                <SocialIcons />
+            </div>
+        </nav>
     );
 }

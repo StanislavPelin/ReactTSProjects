@@ -1,23 +1,23 @@
 import React from "react";
+import logo from '../images/logo.svg'
 
 interface Props {
-    setModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
+    toggle: boolean;
+    setToggle: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Header({setModalOpened}: Props) {
+export default function Header({toggle, setToggle}: Props) {
 
     const click = () => {
-        setModalOpened(true)
+        setToggle(!toggle);
     }
 
     return (
-        <header className="hero">
-            <div className="banner">
-                <h1>modal project</h1>
-                <button className="btn modal-btn" onClick={click}>
-                    open modal
-                </button>
-            </div>
-        </header>
+        <div className="nav-header">
+            <img src={logo} className="logo" alt="logo" />
+            <button className="nav-toggle" onClick={click}>
+                <i className="fas fa-bars"></i>
+            </button>
+        </div>
     )
 }
