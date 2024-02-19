@@ -1,9 +1,7 @@
 import './App.css';
 import React, {useState} from "react";
-import Title from "./components/Title";
-import ButtonContainer from "./components/ButtonContainer";
-import Menu from "./components/Menu";
-import {menu} from "./components/menuItems";
+import Header from "./components/Header";
+import ModalOverlay from "./components/ModalOverlay";
 
 export type MenuItem = {
     id: number;
@@ -15,31 +13,12 @@ export type MenuItem = {
 }
 
 export default function App() {
-    const [menuItemsDisplay, setMenuItemsDisplay] = useState<React.JSX.Element[]>(displayMenuItems(menu));
-
-    function displayMenuItems(menuItems: MenuItem[]) {
-        return menuItems.map(function(item) {
-            return <article key={item.id} className="menu-item">
-                <img src={item.img} className="photo" alt={item.title} />
-                <div className="item-info">
-                    <header>
-                        <h4>{item.title}</h4>
-                        <h4 className="price">{item.price}</h4>
-                    </header>
-                    <p className="item-text">{item.desc}</p>
-                </div>
-            </article>
-        });
-    }
+    const [modalOpened, setModalOpened] = useState<boolean>(false);
 
     return (
-        <section className="menu">
-            <Title />
-            <ButtonContainer
-                displayMenuItems={displayMenuItems}
-                setMenuItemsDisplay={setMenuItemsDisplay}
-            />
-            <Menu menuItemsDisplay={menuItemsDisplay}/>
-        </section>
+        <>
+            <Header setModalOpened={setModalOpened}/>
+            <ModalOverlay modalOpened={modalOpened} setModalOpened={setModalOpened}/>
+        </>
     );
 }
