@@ -1,15 +1,17 @@
 import './App.css';
 import React, {useState} from "react";
-import Button from "./components/Button";
-import Sidebar from "./components/Sidebar";
+import Buttons from "./components/Buttons";
+import Slider from "./components/Slider";
 
 export default function App() {
-    const [isSidebarShown, setIsSidebarShown] = useState(false);
+    const [counter, setCounter] = useState<number>(1);
+    const [transform, setTransform] = useState<string>('');
+    const slides = [1, 2, 3, 4]
 
     return (
         <>
-            <Button isSidebarShown={isSidebarShown} setIsSidebarShown={setIsSidebarShown}/>
-            <Sidebar isSidebarShown={isSidebarShown} setIsSidebarShown={setIsSidebarShown}/>
+            <Slider transform={transform} slides={slides}/>
+            <Buttons counter={counter} setCounter={setCounter} setTransform={setTransform} slides={slides}/>
         </>
     );
 }
