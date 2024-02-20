@@ -1,47 +1,16 @@
-import React, {useState} from "react";
+import React from "react";
 
 interface Props {
-    counter: number;
-    setCounter: React.Dispatch<React.SetStateAction<number>>;
-    setTransform: React.Dispatch<React.SetStateAction<string>>;
-    slides: number[];
+    activeIndex: number;
+    setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function Buttons({counter, setCounter, setTransform, slides}: Props) {
-    const [prevBtnDisplay, setPrevBtnDisplay] = useState<string>('none');
-    const [nextBtnDisplay, setNextBtnDisplay] = useState<string>('');
-    let value = counter;
-
-    const increment = () => {
-        value++;
-        setCounter(value);
-        carousel();
-    }
-    const decrement = () => {
-        value--;
-        setCounter(value);
-        carousel();
-    }
-
-    function carousel() {
-        if (value < slides.length) {
-            setNextBtnDisplay('block');
-        } else {
-            setNextBtnDisplay('none');
-        }
-        if (value > 1) {
-            setPrevBtnDisplay('block');
-        } else {
-            setPrevBtnDisplay('none');
-        }
-
-        setTransform(`translateX(-${(value-1) * 100}%)`);
-    }
-
+export default function Buttons({activeIndex, setActiveIndex}: Props) {
     return (
         <div className="btn-container">
-            <button type="button" className="prevBtn" onClick={decrement} style={{display: prevBtnDisplay}}>prev</button>
-            <button type="button" className="nextBtn" onClick={increment} style={{display: nextBtnDisplay}}>next</button>
+            <button className={`tab-btn${activeIndex===0 ? ' active' : ''}`} data-id="history" onClick={() => setActiveIndex(0)}>history</button>
+            <button className={`tab-btn${activeIndex===1 ? ' active' : ''}`} data-id="vision" onClick={() => setActiveIndex(1)}>vision</button>
+            <button className={`tab-btn${activeIndex===2 ? ' active' : ''}`} data-id="goals" onClick={() => setActiveIndex(2)}>goals</button>
         </div>
     )
 }

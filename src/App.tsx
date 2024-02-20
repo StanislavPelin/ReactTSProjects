@@ -1,17 +1,27 @@
 import './App.css';
 import React, {useState} from "react";
 import Buttons from "./components/Buttons";
-import Slider from "./components/Slider";
+import AboutContent from "./components/AboutContent";
+import hero from './images/hero-bcg.jpeg';
 
 export default function App() {
-    const [counter, setCounter] = useState<number>(1);
-    const [transform, setTransform] = useState<string>('');
-    const slides = [1, 2, 3, 4]
+    const [activeIndex, setActiveIndex] = useState(0);
 
     return (
-        <>
-            <Slider transform={transform} slides={slides}/>
-            <Buttons counter={counter} setCounter={setCounter} setTransform={setTransform} slides={slides}/>
-        </>
+        <section className="section">
+            <div className="title">
+                <h2>about</h2>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iste, maxime.</p>
+            </div>
+            <div className="about-center section-senter">
+                <article className="about-img">
+                    <img src={hero} alt="about"/>
+                </article>
+                <article className="about">
+                    <Buttons activeIndex={activeIndex} setActiveIndex={setActiveIndex}/>
+                </article>
+                <AboutContent activeIndex={activeIndex}/>
+            </div>
+        </section>
     );
 }
